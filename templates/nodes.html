@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>nodes</title>
+</head>
+<script type="text/javascript" src="static/js/index.js"></script>
+<body>
+<div class="cont">
+  <div class="demo">
+    <div class="login">
+      <div class="login__check"></div>
+      <div class="login__form">
+
+
+
+        <form id = "post2">
+          <div class="login__row">
+            <input type="text" class="login__input name" style="width:200px; height:30px; font-size:25px; BACKGROUND-COLOR: transparent;" id = "node" name = "node"  placeholder="node"/>
+          </div>
+
+          <script language="javascript">
+            function register(){
+              var node = post2.node.value 
+              var httpRequest = new XMLHttpRequest();//第一步：创建需要的对象
+              httpRequest.open('POST', window.location.href='/nodes/register', true); //第二步：打开连接
+              httpRequest.setRequestHeader("Content-type","application/json");//设置请求头 
+              var obj = { "nodes": [node] };
+              httpRequest.send(JSON.stringify(obj));//发送请求 将json写入send中
+              httpRequest.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
+                if (httpRequest.readyState==4 && httpRequest.status==201){
+                var json = httpRequest.responseText;//获取到服务端返回的数据
+                alert("Registering a new node : "+ node)
+                alert(json)
+                window.location.href="/nodes";
+                }
+              };
+            }
+            function resolve(){
+              var resolve_url = window.location.href + '/resolve';
+              $.ajax({
+                type: "get",//请求方式
+                url: resolve_url,//地址
+                dataType: "json",//数据类型
+                async: false,
+                success: function(data){
+                    var dataArrays = data;
+                    var message = dataArrays.message;
+                    var chain = dataArrays.chain;
+                    var chain_details = JSON.stringify(chain).toString();
+                    alert("Result : "+ message );
+                    alert("Chain :\n"+chain_details);
+                    window.location.href="/";
+                }
+            });
+            }
+
+          </script>
+            <button type="button" class="login__submit" value="upvote" onclick="register()">Register nodes</button>
+            <button type="button" class="login__submit" value="upvote" onclick="resolve()">Resolve node conflicts</button>
+        </form> 
+
+      </div>
+    </div>
+  </div>
+  <div class="CopyRight" >
+    <p>&copy; CopyRight By SUN jiajun @ BUPT for Blockchain Test </p>
+  </div>
+</div>
+
+</body>
+
+</html>

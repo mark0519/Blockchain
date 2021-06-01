@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+  </script>
+  <title>BlockChain</title>
+</head>
+
+<script type="text/javascript" src="static/js/index.js"></script>
+<body>
+<div class="cont">
+  <div class="demo">
+    <!--CopyRight By SUN jiajun @ BUPT for Blockchain Test--> 
+    <div class="login">
+      <div class="login__check"></div>
+      <div class="login__form">
+
+        <button type="button" class="login__submit" onclick="get_mine()">mine</button>
+
+        <script type="text/javascript">
+          function get_mine(){
+            var mine_url = window.location.href + 'mine';
+            $.ajax({
+                type: "get",//请求方式
+                url: mine_url,//地址
+                dataType: "json",//数据类型
+                async: false,
+                success: function(data){
+                    var dataArrays = data;
+                    var index = dataArrays.index;
+                    var message = dataArrays.message;
+                    var wallet = dataArrays.wallet;
+                    var address = dataArrays.account;
+                    var previous_hash = dataArrays.previous_hash;
+                    var proof = dataArrays.proof;
+                    var transactions = dataArrays.transactions;
+                    var transactions_details = JSON.stringify(transactions).toString();
+                    var show = 'index :   '+ index +'\n'+
+                               'message :   ' + message +'\n'+
+                               'your wallet address : '+ address+'\n'+
+                               'your wallet : ' + wallet +'\n'+
+                               'prev_hash :  \n'+ previous_hash+'\n'+
+                               'proof :   '+proof+'\n'+
+                               'transactions : \n'+ transactions_details+'\n' ;
+                    alert(show);
+                    window.location.href="/";
+                }
+            });
+     
+          }
+        </script>
+        <button type="button" class="login__submit" onclick="window.location.href='/new'">new transaction</button>
+        <button type="button" class="login__submit" onclick="window.location.href='/chain'">all chain</button>
+        <button type="button" class="login__submit" onclick="window.location.href='/nodes'">nodes</button>
+
+      </div>
+    </div>
+  </div>
+  <div class="CopyRight">
+    <p>&copy; CopyRight By SUN jiajun @ BUPT for Blockchain Test </p>
+  </div>
+</div>
+</body>
+
+</html>
