@@ -16,7 +16,7 @@ cURL方式操作{
 
     查看链上全部区块 : [GET] localhost:5000/chain
 
-    创建一笔交易: [POST] localhost:5000/new
+    创建一笔交易: [POST] localhost:5000/new/transaction
         [POST] JSON文件
         {
             "sender": "sender_address" ,
@@ -132,10 +132,10 @@ class Blockchain(object):
                 for i in range(len(block['transactions'])):
                     # 存在以自己钱包地址为发送者的交易
                     if block['transactions'][i]['sender'] == node_identifier:
-                        new_wallet = new_wallet - int(block['transactions']['amount'])
+                        new_wallet = new_wallet - int(block['transactions'][i]['amount'])
                     # 存在以自己钱包地址为接收者的交易
                     if block['transactions'][i]['recipient'] == node_identifier:
-                        new_wallet = new_wallet + int(block['transactions']['amount'])
+                        new_wallet = new_wallet + int(block['transactions'][i]['amount'])
 
             last_block = block  # 让当前区块变成前一个区块，以迭代到一下次循环
             current_index += 1  # 让下一个区块区区块号+1
