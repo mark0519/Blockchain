@@ -1,3 +1,10 @@
+"""
+Author: 孙嘉骏 2020211896
+Date : 2021/6/6
+Version : 1.3.0
+Github : https://github.com/mark0519/Blockchain
+"""
+
 ''' Double Spending Attacks '''
 
 import requests
@@ -107,7 +114,7 @@ print("   Seller wallet :" + str(req_1.json()['wallet'])) # 卖家的账户余�
 print("=========")
 print("After mine by Buyer(Hacker):")
 req_2 = requests.get(url_2_mine)
-print("   Seller account:" + str(req_2.json()['account']))
-print("   Seller wallet :" + str(req_2.json()['wallet'])) # 买家（黑客）的账户余额
+print("   Buyer account:" + str(req_2.json()['account']))
+print("   Buyer wallet :" + str(req_2.json()['wallet'])) # 买家（黑客）的账户余额
 print("=========")
 

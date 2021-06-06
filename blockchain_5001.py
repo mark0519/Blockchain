@@ -1,8 +1,8 @@
 """
 Author: 孙嘉骏 2020211896
-Date : 2021/6/2
+Date : 2021/6/6
 Version : 1.3.0
-
+Github : https://github.com/mark0519/Blockchain
 """
 
 

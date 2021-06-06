@@ -1,5 +1,70 @@
-# Blockchain
-A easy blockchain system
+# Easy Blockchain & Double Spending
+一个简单的区块链系统和一次双花攻击的实现
 
-for learn BlockChain
+  ## 作品内容介绍：  
+
+### 区块链系统  
+
+后端 使用 python 实现简易的区块链系统；  
+
+前端 使用基于 html5 技术的 jquery 框架搭建动态网页；  
+
+并使用 pythonWeb 的 Flask 框架建立前后端的联系，基本实现前后端分离；  
+
+基本实现了一套功能完善且易于使用的区块链系统。  
+
+可以采用 cURL 直接连接或者使用 前端网页 两种交互模式。  
+
+区块链系统主要功能如下：  
+
+1. 采用消耗算力（挖矿）的简化POW算法获得新区快（block）；  
+2. 查看当前所有区块，同时验证区块的合法性（验证是否被修改）；  
+3.  创建一笔交易（transactions），并将细节广播到区块链（BlockChain）中；  
+4.  简易账户系统，不同钱包地址根据计算区块（挖矿）和用户交易改变钱包余额；  
+5. 满足分布式结构，可以注册新计算节点（nodes），分布式计算获取新区块（block）； 
+6.  解决多个区块链网络节点间的节点冲突，更新为区块链网络中最长的那条链条。  
+
+### 对区块链系统的攻击  
+
+双花攻击（Double Spending Attacks)   **双花**，即双重支付，指的是在数字货币系统中，由于数据的可复制性，使得系统可能存在同一笔数字资产因不当操作被重复使用的情况，简单来说，同样一笔数字资产被重复支付，即同样一笔钱被花掉两次或多次。  
+
+在区块链系统中，双花问题会在以下情况下出现：  
+
+1. 由于共识机制导致区块确认时间长，用一个数字货币去进行一次交易，可以在这笔交易还未被确认完成前，进行第二笔交易。  
+
+2. 控制算力来实现双花，第一次交易被验证通过并被记录入区块后，在该网络中有更高的算力验证出新的更长链条，在该链条中这笔钱被第二次花费，由于第二次花费的区块链条更长使第一次交易区块所在链条为无效链条，这样一来，第一次交易所在的区块链被区块链网络放弃，第一次花费的钱就又回到自己账户了，就导致了双花问题。 
+
+本次攻击实验即恶意构造第二种情况实现双花攻击。     
+
+## 区块链系统使用方法
+
+**运行:** python blockchain.py
+
+### cURL 运行：
+**挖矿（创建新的Block）**:  [GET] localhost:5000/mine
+**查看链上全部区块 :** [GET] localhost:5000/chain
+**创建一笔交易:** [POST] localhost:5000/new/transaction
+        [POST] JSON文件
+        {
+            "sender": "sender_address" ,
+            "recipient": "recipient_address" ,
+            "amount": num #交易数量
+        }
+        例如 : { "sender": "faf5c2ad054640499a18688a55d30499" ,
+                "recipient": "any_other_address" ,
+                "amount": 8.8 } 
+**注册新节点:** [POST] localhost:5000/nodes/register
+        [POST] JSON文件
+        { 
+            ”nodes“: ["new_nodes_ip:port"] 
+        }
+        例如 : { "nodes":["127.0.0.1:5001"] }
+**更新区块链(解决节点冲突):** [GET] localhost:5000/nodes/resolve
+
+### GUI运行
+
+访问 localhost:5000
+
+按提示操作
+
 
