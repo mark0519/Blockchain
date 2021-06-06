@@ -42,24 +42,20 @@
 
 ### cURL 运行：
 **挖矿（创建新的Block）**:  [GET] localhost:5000/mine
+
 **查看链上全部区块 :** [GET] localhost:5000/chain
+
 **创建一笔交易:** [POST] localhost:5000/new/transaction
-        [POST] JSON文件
-        {
-            "sender": "sender_address" ,
-            "recipient": "recipient_address" ,
-            "amount": num #交易数量
-        }
-        例如 : { "sender": "faf5c2ad054640499a18688a55d30499" ,
-                "recipient": "any_other_address" ,
-                "amount": 8.8 } 
+
+JSON文件 ：{ "sender": "sender_address" ,"recipient": "recipient_address" , "amount": num #交易数量}
+
 **注册新节点:** [POST] localhost:5000/nodes/register
-        [POST] JSON文件
-        { 
-            ”nodes“: ["new_nodes_ip:port"] 
-        }
-        例如 : { "nodes":["127.0.0.1:5001"] }
+
+JSON文件：{ ”nodes“: ["new_nodes_ip:port"] }
+
 **更新区块链(解决节点冲突):** [GET] localhost:5000/nodes/resolve
+
+
 
 ### GUI运行
 
